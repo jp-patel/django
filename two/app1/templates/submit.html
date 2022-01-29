@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --red: #ff0000;
+            --bg: #f5f5f5;
+            --grey: #909090;
+            --g1: #dcdcdc;
+            --g2: #d3d3d3;
+            --g3: #c0c0c0;
+            --g4: #a9a9a9;
+            --g5: #808080;
+            --g6: #696969;
+            --g7: #778899;
+            --g8: #708090;
+            --g9: #2f4f4f;
+        }
+
+        /*setting font and color values for document*/
+        /*start*/
+        body {
+            font-family: 'Lexend', Arial, Helvetica, sans-serif;
+            background-color: var(--bg);
+        }
+
+        .font {
+            font-family: 'Lexend', Arial, Helvetica, sans-serif;
+        }
+
+        .font::-webkit-input-placeholder {
+            font-family: 'Lexend', Arial, Helvetica, sans-serif;
+        }
+
+        .font:-ms-input-placeholder {
+            font-family: 'Lexend', Arial, Helvetica, sans-serif;
+        }
+
+        .font:-moz-placeholder {
+            font-family: 'Lexend', Arial, Helvetica, sans-serif;
+        }
+
+        .font::-moz-placeholder {
+            font-family: 'Lexend', Arial, Helvetica, sans-serif;
+        }
+
+        /*end*/
+
+        .center {
+            margin: 0rem 10% 0rem 10%;
+        }
+
+        #navbar {
+            padding: 1rem;
+            margin: 0rem;
+            background-color: var(--g9);
+            border-radius: 1rem;
+            color: var(--white);
+        }
+
+        #nav {
+            float: right;
+        }
+
+        .navlink:hover {
+            font-size: 1.1rem;
+            font-weight: bolder;
+            text-decoration: underline;
+        }
+
+        .table {
+            max-width: 30%;
+            display: flex;
+            flex-wrap: wrap;
+            margin: auto;
+            padding: 1rem;
+        }
+
+        .object {
+            width: 100%;
+            margin: 0.5rem;
+            font-size: 2rem;
+            background-color: var(--g3);
+            padding: 1rem;
+            border-radius: 1rem;
+        }
+
+        .object:hover {
+            background-color: var(--g9);
+        }
+
+        .fieldstyle {
+            border-radius: 4px;
+            border-width: 2px;
+            border: solid var(--grey);
+            padding-bottom: 2rem;
+            margin: 1rem 0rem;
+        }
+
+        .imp {
+            color: var(--red);
+        }
+
+        input[type=text],
+        [type=email],
+        [type=tel],
+        [type=date],
+        [type=number],
+        textarea {
+            width: 95%;
+            padding: 12px;
+            border-width: 0px 0px 2px 0px;
+            border-bottom: solid var(--black);
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        input[list],
+        select {
+            width: 10%;
+            padding: 12px;
+            border-width: 0px 0px 2px 0px;
+            border-bottom: solid var(--black);
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        input[type=date],
+        textarea {
+            resize: none;
+        }
+
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+        }
+
+        legend {
+            color: var(--grey);
+        }
+
+        input[type=submit],
+        input[type=reset] {
+            background-color: var(--black);
+            color: var(--white);
+            font-weight: bold;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+
+        input[type=submit]:hover,
+        input[type=reset]:hover {
+            background-color: var(--grey);
+        }
+
+        a {
+            color: var(--white);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar">
+        <a href="{% url 'submit' %}" class="navlink"><strong>Home</strong></a>
+        <div id="nav">
+            <a href="{% url 'categorySubmit' %}" class="navlink">Category</a><span> | </span>
+            <a href="{% url 'subcategorySubmit' %}" class="navlink">Sub Category</a><span> | </span>
+            <a href="{% url 'productSubmit' %}" class="navlink">Product</a><span> | </span>
+            <a href="{% url 'manufacturerSubmit' %}" class="navlink">Manufacturer</a>
+        </div>
+    </div>
+
+    {% if submit %}
+    <div style="text-align: center; margin: 1rem;">
+        <h1 style="font-size: 3.5rem; margin-top: 6rem;">Where to add data?</h1>
+        <div class="table">
+            <a href="{% url 'categorySubmit' %}" class="object">Category</a>
+            <a href="{% url 'subcategorySubmit' %}" class="object">Sub Category</a>
+            <a href="{% url 'productSubmit' %}" class="object">Product</a>
+            <a href="{% url 'manufacturerSubmit' %}" class="object">Manufacturer</a>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="center" style="padding: 5rem 0rem 5rem 0rem;">
+        {% if category %}
+        <h1>Please fill up Category details</h1>
+        <div>
+            <form method="POST" id="category">
+                <fieldset class="fieldstyle">
+                    <!-- <legend><big>Category</big></legend> -->
+                    {% csrf_token %}
+                    <label for="id_categoryName">Category Name <span class="imp"><b>*</b></span></label>
+                    <div>{{ category.categoryName }}</div>
+                    <!-- <label for="id_categoryName">Category Image <span class="imp"><b>*</b></span></label>
+                    <div>{{ category.categoryImage }}</div> -->
+                </fieldset>         
+                <div>
+                    <input type="reset" value="Clear" form="category" style="margin-left: 1rem;">
+                    <input type="submit" value="Add" form="category">
+                </div>
+            </form>
+        </div>
+        {% endif %}
+
+        {% if subCategory %}
+        <h1>Please fill up Sub Category details</h1>
+        <div>
+            <form method="POST" id="subcategory">
+                <fieldset class="fieldstyle">
+                    <!-- <legend><big>Sub Category</big></legend> -->
+                    {% csrf_token %}
+                    <label for="id_categoryName">Category Name <span class="imp"><b>*</b></span></label>
+                    <div>{{ subCategory.categoryName }}</div>
+                    <label for="id_subCategoryName">Subcategory Name <span class="imp"><b>*</b></span></label>
+                    <div>{{ subCategory.subCategoryName }}</div>
+                    <!-- <label for="id_subCategoryName">Subcategory Image <span class="imp"><b>*</b></span></label>
+                    <div>{{ subCategory.subCategoryImage }}</div> -->
+                </fieldset>         
+                <div>
+                    <input type="reset" value="Clear All" form="subcategory" style="margin-left: 1rem;">
+                    <input type="submit" value="Add" form="subcategory">
+                </div>
+            </form>
+        </div>
+        {% endif %}
+
+        {% if manufacturer %}
+        <h1>Please fill up Manufacturer details</h1>
+        <div>
+            <form method="POST" id="manufacturer">
+                <fieldset class="fieldstyle">
+                    <!-- <legend><big>Manufacturer</big></legend> -->
+                    {% csrf_token %}
+                    <label for="id_manufacturer">Manufacturer <span class="imp"><b>*</b></span></label>
+                    <div>{{ manufacturer.manufacturer }}</div>
+                    <!-- <label for="id_manufacturer">Manufacturer Logo <span class="imp"><b>*</b></span></label>
+                    <div>{{ manufacturer.manufacturerImage }}</div> -->
+                </fieldset>         
+                <div>
+                    <input type="reset" value="Clear" form="manufacturer" style="margin-left: 1rem;">
+                    <input type="submit" value="Add" form="manufacturer">
+                </div>
+            </form>
+        </div>
+        {% endif %}
+
+        {% if product %}
+        <h1>Please fill up Product details</h1>
+        <div>
+            <form method="POST" id="product">
+                <fieldset class="fieldstyle">
+                    <!-- <legend><big>Product</big></legend> -->
+                    {% csrf_token %}
+                    <label for="id_productName">Product Name <span class="imp"><b>*</b></span></label>
+                    <div>{{ product.productName }}</div>
+                    <label for="id_category">Category <span class="imp"><b>*</b></span></label>
+                    <div>{{ product.category }}</div>
+                    <label for="id_subCategory">Subcategory <span class="imp"><b>*</b></span></label>
+                    <div>{{ product.subCategory }}</div>
+                    <label for="id_ratings">Ratings <span class="imp"><b>*</b></span></label>
+                    <div>{{ product.ratings }}</div>
+                    <label for="id_prize">prize <span class="imp"><b>*</b></span></label>
+                    <div>{{ product.prize }}</div>
+                    <label for="id_description">Description <span class="imp"><b>*</b></span></label>
+                    <div>{{ product.description }}</div>
+                    <!-- <label for="id_description">Product Image <span class="imp"><b>*</b></span></label>
+                    <div>{{ product.productImage }}</div> -->
+                    <label for="id_manufacturer">Manufacturer <span class="imp"><b>*</b></span></label>
+                    <div>{{ product.manufacturer }}</div>
+                </fieldset>         
+                <div>
+                    <input type="reset" value="Clear All" form="product" style="margin-left: 1rem;">
+                    <input type="submit" value="Add" form="product">
+                </div>
+            </form>
+        </div>
+        {% endif %}
+
+        {% if not submit %}
+        <div><span class="imp"><b>*</b></span> indicates mandatory field</div>
+        {% endif %}
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+
+:root {
+    --blue: #00308F;
+    --black: #000000;
+    --white: #ffffff;
+    --red: #ff0000;
+    --bg: #f5f5f5;
+    --grey: #909090;
+    --g1: #dcdcdc;
+    --g2: #d3d3d3;
+    --g3: #c0c0c0;
+    --g4: #a9a9a9;
+    --g5: #808080;
+    --g6: #696969;;
+    --g7: #778899;
+    --g8: #708090;
+    --g9: #2f4f4f;
+}
+
+/*setting font and color values for document*/
+/*start*/
+body {
+    font-family: 'Lexend', Arial, Helvetica, sans-serif;
+    background-color: var(--bg);
+}
+
+.font {
+    font-family: 'Lexend', Lexend, Arial, Helvetica, sans-serif;
+}
+
+.font::-webkit-input-placeholder {
+    font-family: 'Lexend', Arial, Helvetica, sans-serif;
+}
+
+.font:-ms-input-placeholder {
+    font-family: 'Lexend', Arial, Helvetica, sans-serif;
+}
+
+.font:-moz-placeholder {
+    font-family: 'Lexend', Arial, Helvetica, sans-serif;
+}
+
+.font::-moz-placeholder {
+    font-family: 'Lexend', Arial, Helvetica, sans-serif;
+}
+
+/*end*/
+
+.center {
+    text-align: center;
+    margin: 1rem;
+}
+
+#navbar {
+    padding: 1rem;
+    margin: 0rem;
+    background-color: var(--g9);
+    border-radius: 1rem;
+    color: var(--white);
+}
+
+#nav {
+    float: right;
+}
+
+.navlink:hover{
+    font-size: 1.1rem;
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.item {
+    border-radius: 1rem;
+    margin: 1.5rem;
+    padding: 0.5rem;
+    height: 500%;
+    min-width: 20%;
+    max-width: 100%;
+    background-color: var(--g2);
+}
+
+.table {
+    max-width: 30%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    padding: 1rem;
+}
+
+.object {
+    width: 100%;
+    margin: 0.5rem;
+    font-size: 2rem;
+    background-color: var(--g3);
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.object:hover{
+    background-color: var(--g9);
+}
+
+.big {
+    line-height: 7rem;
+    font-size: 4rem;
+}
+
+a{
+    color:var(--white);
+    text-decoration: none;
+}

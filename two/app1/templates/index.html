@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <!-- <link href="main.css" rel="stylesheet"> -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --red: #ff0000;
+            --bg: #f5f5f5;
+            --grey: #909090;
+            --g1: #dcdcdc;
+            --g2: #d3d3d3;
+            --g3: #c0c0c0;
+            --g4: #a9a9a9;
+            --g5: #808080;
+            --g6: #696969;
+            --g7: #778899;
+            --g8: #708090;
+            --g9: #2f4f4f;
+        }
+
+        /*setting font and color values for document*/
+        /*start*/
+        body {
+            font-family: 'Lexend', Arial, Helvetica, sans-serif;
+            background-color: var(--bg);
+        }
+
+        .font {
+            font-family: 'Lexend', Lexend, Arial, Helvetica, sans-serif;
+        }
+
+        .font::-webkit-input-placeholder {
+            font-family: 'Lexend', Arial, Helvetica, sans-serif;
+        }
+
+        .font:-ms-input-placeholder {
+            font-family: 'Lexend', Arial, Helvetica, sans-serif;
+        }
+
+        .font:-moz-placeholder {
+            font-family: 'Lexend', Arial, Helvetica, sans-serif;
+        }
+
+        .font::-moz-placeholder {
+            font-family: 'Lexend', Arial, Helvetica, sans-serif;
+        }
+
+        /*end*/
+
+        .center {
+            text-align: center;
+            margin: 1rem;
+        }
+
+        #navbar {
+            padding: 1rem;
+            margin: 0rem;
+            background-color: var(--g9);
+            border-radius: 1rem;
+            color: var(--white);
+        }
+
+        #nav {
+            float: right;
+        }
+
+        .navlink:hover {
+            font-size: 1.1rem;
+            font-weight: bolder;
+            text-decoration: underline;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .item {
+            border-radius: 1rem;
+            margin: 1.5rem;
+            padding: 0.5rem;
+            min-height: 200px;
+            height: 500%;
+            min-width: 20%;
+            max-width: 100%;
+            background-color: var(--g2);
+        }
+
+        .image
+        {
+            border-radius: 1rem;
+            margin: 0.5rem;
+            margin-bottom: 0rem;
+            min-height: 200px;
+            height: 500%;
+            min-width: 20%;
+            max-width: 100%;
+            background-color: var(--g2);
+        }
+
+        .table {
+            max-width: 30%;
+            display: flex;
+            flex-wrap: wrap;
+            margin: auto;
+            padding: 1rem;
+        }
+
+        .object {
+            width: 100%;
+            margin: 0.5rem;
+            font-size: 2rem;
+            background-color: var(--g3);
+            padding: 1rem;
+            border-radius: 1rem;
+        }
+
+        .object:hover {
+            background-color: var(--g9);
+        }
+
+        .flexbox {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        #product {
+            min-width: 35%;
+            max-width: 100%;
+        }
+
+        #description {
+            min-width: 50%;
+            max-width: 100%;
+            flex-grow: 2;
+        }
+
+        #other {
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+        }
+
+        .big {
+            /* line-height: 7rem; */
+            font-size: 4rem;
+        }
+
+        a {
+            color: var(--link);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar">
+        <a href="{% url 'home' %}" class="navlink"><strong>Home</strong></a>
+        <div id="nav">
+            <a href="{% url 'categories' %}" class="navlink">Categories</a><span> | </span>
+            <a href="{% url 'subcategories' %}" class="navlink">Sub Categories</a><span> | </span>
+            <a href="{% url 'products' %}" class="navlink">Products</a><span> | </span>
+            <a href="{% url 'manufacturers' %}" class="navlink">Manufacturers</a><span> | </span>
+            <a href="{% url 'logout' %}" class="navlink">Logout</a>
+        </div>
+    </div>
+
+    {% if home %}
+    <div class="center">
+        <h1 style="font-size: 3.5rem; margin-top: 6rem;">Where to next?</h1>
+        <div class="table">
+            <a href="{% url 'categories' %}" class="object">Categories</a>
+            <a href="{% url 'subcategories' %}" class="object">Sub Categories</a>
+            <a href="{% url 'products' %}" class="object">Products</a>
+            <a href="{% url 'manufacturers' %}" class="object">Manufacturers</a>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Categories listing starts from here -->
+    {% if category %}
+    <div class="center" style="clear: right;">
+        <h1>Categories</h1>
+        <div class="container">
+            {% for i in category %}
+            <div class="item">
+                {% if i.categoryImage %}
+                <div class="image" style="background-image: url({{ i.categoryImage.url }}); background-size: cover;" title="{{i}}">
+                </div>
+                {% endif %}
+                <div>
+                    <h1 class="big">{{ i|truncatechars:5 }}</h1>
+                </div>
+                <div>{{ i }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Sub categories listing starts from here -->
+    {% if subCategory %}
+    <div class="center" style="clear: right;">
+        <h1>Sub Categories</h1>
+        <div class="container">
+            {% for i in subCategory %}
+            <div class="item">
+                {% if i.subCategoryImage %}
+                <div class="image" style="background-image: url({{ i.subCategoryImage.url }}); background-size: cover;" title="{{i}}">
+                </div>
+                {% endif %}
+                <div>
+                    <h1 class="big">{{ i|truncatechars:5 }}</h1>
+                </div>
+                <div>{{ i }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Product listing starts from here -->
+    {% if product %}
+    <div class="center" style="clear: right;">
+        <h1>Products</h1>
+        <div class="container">
+            {% for i in product %}
+            <div class="item">
+                {% if i.productImage %}
+                <div class="image" style="background-image: url({{ i.productImage.url }}); background-size: cover;" title="{{i}}">
+                </div>
+                {% endif %}
+                <div>
+                    <!-- <img src="{{ i.productImage.url }}" style="width: 8%; height: 8%;"> -->
+                    <h1 class="big" style="margin: 1.5rem;">{{ i|truncatechars:5 }}</h1>
+                </div>
+                <div style="margin: 0rem 1rem 0.5rem 1rem;float: left;">{{ i }}</div>
+                <!-- <div style="margin: 0rem 1rem 0.5rem 1rem;float: right;"><a href="http://127.0.0.1:8000/productdetails?product={{ i }}"
+                        style="text-decoration: underline; color: #4169E1;">Dive Deep..</a></div> -->
+                <div style="margin: 0rem 1rem 0.5rem 1rem;float: right;"><a href="{% url "productdetails" i.productId %}"
+                    style="text-decoration: underline; color: #4169E1;">Dive Deep..</a></div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Manufacturer listing starts from here -->
+    {% if manufacturer %}
+    <div class="center" style="clear: right;">
+        <h1>Manufacturers</h1>
+        <div class="container">
+            {% for i in manufacturer %}
+            <div class="item">
+                {% if i.manufacturerImage %}
+                <div class="image" style="background-image: url({{ i.manufacturerImage.url }}); background-size: 100% 100%;" title="{{i}}">
+                </div>
+                {% endif %}
+                <div>
+                    <h1 class="big">{{ i|truncatechars:5 }}</h1>
+                </div>
+                <div>{{ i }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Manufacturer listing starts from here -->
+    {% if productDetail %}
+    <div class="center" style="clear: right;">
+        <h1>Product Details</h1>
+        <big><span><strong>From : </strong></span><span>{{ productDetail.category }} >
+                {{productDetail.subCategory}}</span></big>
+        <div class="flexbox">
+            <div class="item" id="product">
+                {% if productDetail.productImage %}
+                <div class="image" style="background-image: url({{ productDetail.productImage.url }}); background-size: cover;" title="{{i}}">
+                </div>
+                {% endif %}
+                <div>
+                    <h1 class="big">{{ productDetail.productName }}</h1>
+                    <span>ProductId: {{ productDetail.productId }}</span>
+                </div>
+            </div>
+
+            <div class="item" id="description">
+                <details>
+                    <summary>Product Description: </summary>
+                    <div>{{ productDetail.description }}</div>
+                </details>
+            </div>
+
+            <div class="item" id="other" style="min-height: 0;">
+                <div>Ratings: {{ productDetail.ratings }}/5.0</div>
+                <div>Rs. {{ productDetail.prize }}</div>
+                <div>Product By: {{ productDetail.manufacturer }}</div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</body>
+
+</html>
